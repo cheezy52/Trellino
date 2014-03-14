@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: cards
+#
+#  id          :integer          not null, primary key
+#  title       :string(255)      not null
+#  description :text
+#  rank        :integer          not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#  list_id     :integer
+#
+
 class Card < ActiveRecord::Base
 
   validates :title, :rank, :list_id, presence: true

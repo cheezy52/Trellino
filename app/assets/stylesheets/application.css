@@ -34,10 +34,10 @@ input#logout, input#logout{
 div#content {
   margin:0px auto;
   width: auto;
-  
+
   padding: 10px;
   margin-bottom: 10px;
-  
+
   overflow-x: scroll;
 }
 
@@ -98,4 +98,24 @@ button, input[type="submit"] {
 button:hover, input[type="submit"]:hover {
   background-color: transparent;
   color: blue;
+}
+
+td {
+  border: 1px solid black;
+}
+
+th {
+  border: 1px solid red;
+}
+
+.board-lists {
+  border: 1px solid blue;
+}
+
+.list-cards {
+  float: left;
+  padding: 15px;
+  margin: 10px;
+  width: 150px;
+  display: block-inline;
 }
