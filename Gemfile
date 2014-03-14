@@ -30,10 +30,8 @@ gem 'jbuilder', '~> 1.2'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+  gem 'annotate'
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -41,16 +39,16 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rspec-rails'
+  gem 'debugger'
+end
+
 gem 'jquery-ui-rails'
 gem 'underscore-rails'
 gem 'backbone-on-rails'
 gem 'backbone-relational-rails'
 gem 'rake', '10.1.1'
-gem 'bcrypt-ruby', '~> 3.0.0'
-group :development, :test do
-  gem 'rspec-rails'
-end
+gem 'bcrypt-ruby'
