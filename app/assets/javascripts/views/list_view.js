@@ -1,5 +1,6 @@
 Trellino.Views.ListView = Trellino.CompositeView.extend({
   template: JST["list"],
+  tagName: "div class='list-container'",
   $subviewContainer: function() {
     return $("#list-" + this.model.get("id") + "-cards");
   },
@@ -12,6 +13,7 @@ Trellino.Views.ListView = Trellino.CompositeView.extend({
     this.subviews().forEach(function(subview) {
       view.$subviewContainer().append(subview.render().$el);
     });
+    $('.ui-sortable').sortable();
     return this;
   },
 

@@ -54,5 +54,7 @@ Trellino.Routers.TrellinoRouter = Backbone.Router.extend({
     }
     this.currentView = view;
     $("#content").html(view.render().$el);
+    $('.ui-sortable').sortable();
+    $('.list-container').sortable();
   }
 })

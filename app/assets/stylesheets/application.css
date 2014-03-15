@@ -74,11 +74,18 @@ ul {
 }
 
 
-li {
-  padding-top: 2px;
-  padding-left: 0;
+.board-lists li {
+  list-style: none;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #000;
+  background-color: #C0C0C0;
+  width: 150px;
 }
 
+div.list-container {
+  border: 1px solid blue;
+}
 
 .hidden {
 	display: none;
@@ -113,7 +120,6 @@ th {
 }
 
 .list-cards {
-  float: left;
   padding: 15px;
   margin: 10px;
   width: 150px;

@@ -19,6 +19,7 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
     this.subviews().forEach(function(subview) {
       view.$subviewContainer().append(subview.render().$el);
     });
+    $('.board-lists').sortable();
     return this;
   },
 

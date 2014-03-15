@@ -1,5 +1,6 @@
 Trellino.Views.CardView = Backbone.View.extend({
   template: JST["card"],
+  tagName: "li class='ui-state-default'",
 
   render: function() {
     this.$el.html(this.template({
