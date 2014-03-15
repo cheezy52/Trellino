@@ -13,8 +13,19 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
 
   render: function() {
     var view = this;
+    var maxRank = this.collection.max(function(model) {
+      return model.get("rank");
+    });
+    console.log(maxRank);
+    if (maxRank !== -Infinity) {
+      maxRank = maxRank.get("rank");
+    } else {
+      maxRank = 0;
+    }
+    console.log(maxRank);
     this.$el.html(this.template({
-      board: this.model
+      board: this.model,
+      maxRank: maxRank
     }));
     this.subviews().forEach(function(subview) {
       view.$subviewContainer().append(subview.render().$el);
