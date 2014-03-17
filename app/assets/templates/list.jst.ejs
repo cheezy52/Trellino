@@ -1,13 +1,21 @@
-<h2><%= list.escape("title") %></h2>
-<button class="list-delete" data-id="<%= list.escape("id") %>">(Delete)</button>
+<div class="list-container-indiv">
+  <h2><%= list.escape("title") %></h2>
 
-<form class="new-card">
-  <label>Card Title<input type="text" name="card[title]"></input></label>
-  <label>Card Description<input type="text" name="card[description]"></input></label>
+  <div class="list-delete-container hide">
+    <button class="list-delete" data-id="<%= list.escape("id") %>">(Delete)</button>
+  </div>
 
-  <input type="submit" value="Add Card"></input>
-</form>
+  <ul class="ui-sortable" id="list-<%= list.escape("id")%>-cards"></ul>
 
-<button id="test">test</button>
+  <div class="new-card-container hide">
+    <div class="new-card-show-button">
+      <button class="new-card-show">New Card</button>
+    </div>
+    <form class="new-card hide">
+      <label>Card Title<input type="text" name="card[title]"></input></label>
+      <label>Card Description<input type="text" name="card[description]"></input></label>
 
-<ul class="ui-sortable" id="list-<%= list.escape("id")%>-cards">
+      <input type="submit" value="Add Card"></input>
+    </form>
+  </div>
+</div>

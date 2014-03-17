@@ -39,9 +39,8 @@ Trellino.CompositeView = Backbone.View.extend({
 
   removeSubview: function(passedModel) {
     var topView = this;
-    var passedModelView = _.find(this.subviews(), function(checkedSubview) {
-      return passedModel === checkedSubview.model;
-    });
+    var passedModelView = this.findSubviewByModel(passedModel);
+
     if (passedModelView) {
       this.subviews().splice(this.subviews().indexOf(passedModelView), 1)
       passedModelView.remove();
@@ -52,5 +51,12 @@ Trellino.CompositeView = Backbone.View.extend({
     this.subviews().sort(function(subview1, subview2) {
       return subview1.model.get(sortVar) - subview2.model.get(sortVar);
     })
+  },
+
+  findSubviewByModel: function(model) {
+    var foundView = _.find(this.subviews(), function(checkedSubview) {
+      return model === checkedSubview.model;
+    });
+    return foundView;
   }
 })

@@ -18,8 +18,8 @@ Trellino.Views.BoardNewView = Backbone.View.extend({
     newBoard.save(formData, {
       success: function(model) {
         view.collection.add(model);
-        view.$el.append("Board creation successful!")
-        Backbone.history.navigate("#/")
+        view.$el.append("Board creation successful!");
+        Backbone.history.navigate("#/boards/" + model.get("id"));
       }
     });
   }

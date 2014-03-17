@@ -1,2 +1,8 @@
-<span><%= card.escape("title")%> - <%= card.escape("description")%></span>
-<button class="delete-card" data-id="<%= card.escape("id") %>">Delete</button>
+<div class="card-container">
+  <span data-id="<%= card.escape("id") %>">
+    <%= card.escape("title")%> - <%= card.escape("description")%>
+  </span>
+  <div class="card-delete-container hide">
+    <button class="delete-card" data-id="<%= card.escape("id") %>">Delete</button>
+  </div>
+</div>

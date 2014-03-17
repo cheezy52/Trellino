@@ -7,7 +7,8 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
 
   events: {
     "submit #new-list": "addList",
-    "click .list-delete": "deleteList"
+    "click .list-delete": "deleteList",
+    "update .board-lists": "updateListRanks"
   },
 
   initialize: function() {
@@ -15,6 +16,24 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
     this.listenTo(this.collection, "remove", this.removeSubview);
     this.listenTo(this.collection, "change:title sync update", this.render);
     this.listenTo(this.model, "change sync update", this.render);
+  },
+
+  updateListRanks: function(event, ui) {
+    var view = this;
+    var lists = $(ui.item).parent().find(".list-container");
+
+    for (var i = 1; i < lists.length; i++) {
+      //this is horrible hacky bullshit, don't do this
+      var firstModel = view.collection.get($(lists[i - 1].children[1]).data("id"));
+      var secondModel = view.collection.get($(lists[i].children[1]).data("id"));
+
+      if (firstModel.get("rank") >= secondModel.get("rank")) {
+        secondModel.set("rank", firstModel.get("rank") + 1);
+        secondModel.save();
+      }
+    }
+    this.sortSubviews("rank");
+    this.render();
   },
 
   render: function() {
@@ -27,7 +46,10 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
     this.subviews().forEach(function(subview) {
       view.$subviewContainer().append(subview.render().$el);
     });
-    $('.board-lists').sortable();
+
+    $('.board-lists').sortable({
+      update: this.updateListRanks.bind(this)
+    });
 
     return this;
   },
@@ -52,11 +74,11 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
 
     var newList = new Trellino.Models.List({
       board_id: this.model.id,
-      rank: maxRank
+      rank: maxRank + 1
     });
 
     formData.list.board_id = this.model.id;
-    formData.list.rank = maxRank;
+    formData.list.rank = maxRank + 1;
 
     newList.save(formData, {
       success: function(model) {

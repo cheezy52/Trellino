@@ -1,6 +1,7 @@
 <h1><%= board.escape("title") %></h1>
 
-<div class="board-lists" id="board-<%= board.escape("id") %>-lists">
+<div class="board-lists" data-id="<%= board.escape("id") %>"
+  id="board-<%= board.escape("id") %>-lists">
 </div>
 
 <form id="new-list">

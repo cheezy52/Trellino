@@ -85,6 +85,12 @@ ul {
 
 div.list-container {
   border: 1px solid blue;
+/*  float: left;*/
+}
+
+.board-lists {
+  border: 1px solid blue;
+/*  height: 600px;*/
 }
 
 .hidden {
@@ -115,13 +121,10 @@ th {
   border: 1px solid red;
 }
 
-.board-lists {
-  border: 1px solid blue;
-}
-
 .list-cards {
   padding: 15px;
   margin: 10px;
   width: 150px;
   display: block-inline;
+  float: top;
 }
