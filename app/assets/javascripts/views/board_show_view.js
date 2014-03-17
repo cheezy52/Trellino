@@ -1,7 +1,13 @@
 Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
   template: JST["board_show"],
+
   $subviewContainer: function() {
-    return $("#board-" + this.model.get("id") + "-lists");
+    return this.$("#board-" + this.model.get("id") + "-lists");
+  },
+
+  events: {
+    "submit #new-list": "addList",
+    "click .list-delete": "deleteList"
   },
 
   initialize: function() {
@@ -13,24 +19,16 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
 
   render: function() {
     var view = this;
-    var maxRank = this.collection.max(function(model) {
-      return model.get("rank");
-    });
-    console.log(maxRank);
-    if (maxRank !== -Infinity) {
-      maxRank = maxRank.get("rank");
-    } else {
-      maxRank = 0;
-    }
-    console.log(maxRank);
+
     this.$el.html(this.template({
-      board: this.model,
-      maxRank: maxRank
+      board: this.model
     }));
+
     this.subviews().forEach(function(subview) {
       view.$subviewContainer().append(subview.render().$el);
     });
     $('.board-lists').sortable();
+
     return this;
   },
 
@@ -43,5 +41,50 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
     }));
     this.sortSubviews("rank");
     this.render();
+  },
+
+  addList: function(event) {
+    event.preventDefault();
+
+    var view = this;
+    var maxRank = this.maxRank();
+    var formData = $(event.target).serializeJSON();
+
+    var newList = new Trellino.Models.List({
+      board_id: this.model.id,
+      rank: maxRank
+    });
+
+    formData.list.board_id = this.model.id;
+    formData.list.rank = maxRank;
+
+    newList.save(formData, {
+      success: function(model) {
+        view.collection.add(model);
+      }
+    });
+    //should fire addListView as a result
+  },
+
+  deleteList: function(event) {
+    var view = this;
+    event.preventDefault();
+    var list = this.collection.get($(event.target).data("id"));
+    list.destroy();
+    this.collection.remove(list);
+    //destroy should remove from collection, which fires removeSubview event
+  },
+
+  maxRank: function() {
+    var maxList = this.collection.max(function(model) {
+      return model.get("rank");
+    });
+
+    if (maxList !== -Infinity) {
+      maxRank = maxList.get("rank");
+    } else {
+      maxRank = 0;
+    }
+    return maxRank;
   }
 })

@@ -3,7 +3,7 @@ Trellino.Collections.BoardLists = Backbone.Collection.extend({
     return "boards/" + this.boardId + "/lists";
   },
   initialize: function(models, options) {
-    this.boardId = options.boardId;
+    this.boardId = (options.boardId) ? options.boardId : null;
   },
   model: Trellino.Models.List,
   comparator: function(model) {

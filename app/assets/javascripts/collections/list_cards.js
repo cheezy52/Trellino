@@ -2,10 +2,10 @@ Trellino.Collections.ListCards = Backbone.Collection.extend({
   url: function() {
     return "lists/" + this.listId + "/cards";
   },
-  model: Trellino.Models.Card,
   initialize: function(models, options) {
-    this.listId = options.listId;
+    this.listId = (options.listId) ? options.listId : null;
   },
+  model: Trellino.Models.Card,
   getOrFetch: function(id) {
     var coll = this;
     if (this.get(id)) {

@@ -18,8 +18,12 @@
         <div class="nav navbar-text navbar-right">
           Logged in as <%= current_user.email %>
         </div>
-        <%= button_to "Log Out", session_url, method: :delete, class: "navbar-btn btn btn-primary" %>
+        <%= button_to "Log Out", session_url, method: :delete, class: "nav navbar-btn btn btn-primary navbar-right" %>
         </form>
+      <% else %>
+        <div class="nav navbar-btn btn btn-primary navbar-right">
+          <%= link_to "Sign In", new_session_url %>
+        </div>
       <% end %>
     </div>
   </nav>
