@@ -5,7 +5,7 @@ Trellino::Application.routes.draw do
   resources :lists, only: [] do
     resources :cards, only: [:index]
   end
-  resources :cards, only: [:create, :update, :destroy] do
+  resources :cards, only: [:create, :update, :destroy, :show] do
     resources :todo_items, only: [:create, :update, :destroy]
   end
   resources :card_assignments, only: :destroy

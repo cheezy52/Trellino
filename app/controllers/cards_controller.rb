@@ -38,6 +38,15 @@ class CardsController < ApplicationController
     render json: nil
   end
 
+  def show
+    @card = Card.find(params[:id])
+    if @card
+      render json: @card
+    else
+      head 404
+    end
+  end
+
 
   private
   def card_params

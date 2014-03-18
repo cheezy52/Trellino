@@ -48,7 +48,7 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
     });
 
     $('.board-lists').sortable({
-      update: this.updateListRanks.bind(this)
+      update: this.updateListRanks.bind(this),
     });
 
     return this;
@@ -59,7 +59,8 @@ Trellino.Views.BoardShowView = Trellino.CompositeView.extend({
     listCards.fetch();
     this.addSubview(new Trellino.Views.ListView({
       model: model,
-      collection: listCards
+      collection: listCards,
+      parentView: this
     }));
     this.sortSubviews("rank");
     this.render();
